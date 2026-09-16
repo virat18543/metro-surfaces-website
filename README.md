@@ -120,18 +120,65 @@ gh api repos/jenilrita246-lab/metro-surfaces-website/commits/$(git rev-parse HEA
 
 ### The custom domain
 
-`metrosurfaces.in` already points at Vercel. DNS is held at **GoDaddy**
-(`ns31/ns32.domaincontrol.com`), with the apex `A` on `216.198.79.1` and `www` CNAMEd to
-a Vercel target. It is bound to the **old** project in the same Vercel team.
+`metrosurfaces.in` already points at Vercel, so the cutover is **never a registrar
+change**. DNS stays at GoDaddy throughout.
 
-So the cutover is a **move between projects**, not a registrar change. Adding a domain
-that's already bound elsewhere returns `409 Conflict`, so use the dashboard's move
-prompt, or:
+Verified 2026-07-31:
+
+| Record | Value | Changes on cutover? |
+| --- | --- | --- |
+| Nameservers | `ns31` / `ns32.domaincontrol.com` (GoDaddy) | No |
+| Apex `A` | `216.198.79.1` | No. This is Vercel's shared IP, identical for every account and project |
+| `www` `CNAME` | `c6102dda7d84bd62.vercel-dns-017.com` | Only on a cross-account move, where the hash is reissued |
+| `MX` | none | No email to endanger |
+| TTL | 600s | Propagation is about 10 minutes |
+
+`www` is canonical: the apex 301s to it, matching `site.url` in `src/lib/site.ts`. Keep
+that direction or canonical tags, the sitemap and OG cards all point at the wrong host.
+
+#### First, work out which case you're in
+
+The domain is bound to the **old** project. Whether that project sits in the same Vercel
+account or a different one decides the whole procedure, and it has never been confirmed
+from inside the dashboard. Don't guess. In `metro-surfaces-website`, go to Settings then
+Domains, add `www.metrosurfaces.in`, and read the error:
+
+| Error says | Meaning | Path |
+| --- | --- | --- |
+| already in use by another **project** | same account | A |
+| already in use by another **Vercel account** | different account | B |
+
+The test is non-destructive and changes nothing either way.
+
+#### Path A: same account
+
+Use the dashboard's move prompt, or:
 
 ```bash
 npx vercel domains add metrosurfaces.in metro-surfaces-website --force
 ```
 
-Afterwards check the project's Domains tab reads "Valid Configuration"; the `www` CNAME
-target is project-specific and can be reissued on a move. There are no MX records on the
-domain, so email is not at risk.
+#### Path B: different account
+
+`--force` will not work across accounts. Either verify ownership, or release the domain
+first:
+
+1. In the add-domain dialog, Vercel supplies a `_vercel` TXT record. Add it at GoDaddy
+   (Type `TXT`, Name `_vercel`, Value as shown).
+2. Wait out the TTL, then click Verify. The domain detaches from the old account. The old
+   site serves right up to this moment, so downtime is small.
+3. **Immediately** replace the `www` CNAME at GoDaddy with the new target Vercel shows.
+   This is the real downtime window, so have the record open and ready beforehand.
+4. Leave the apex `A` record alone.
+5. Add the apex as a redirect to `www`.
+
+If you control both accounts you can skip the TXT: remove the domain in the old account
+at **both** the project and the account-settings level (the second is easy to miss), then
+add it fresh. Faster, but downtime starts at removal rather than at verification.
+
+#### Afterwards
+
+Confirm the Domains tab reads "Valid Configuration" on both hosts with certificates
+issued, then check the apex, `www`, a deep page and the sitemap. Finally retire the old
+project so it cannot reclaim the domain, and disconnect any project wired to a fork of
+this repo, or pushes there keep producing stray deployments.
