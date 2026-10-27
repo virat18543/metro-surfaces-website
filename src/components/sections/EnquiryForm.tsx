@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { cn } from "@/lib/cn";
 import { products } from "@/lib/products";
-import { contact } from "@/lib/site";
+import { contact, whatsappLink } from "@/lib/site";
 
 const PROJECT_TYPES = [
   "Commercial / Office",
@@ -47,7 +47,7 @@ export function EnquiryForm() {
       `Details: ${form.message || "Not given"}`,
     ].join("\n");
 
-  const whatsappHref = `${contact.whatsapp}?text=${encodeURIComponent(compose())}`;
+  const whatsappHref = whatsappLink(compose());
   const mailHref = `${contact.emailHref}?subject=${encodeURIComponent(
     `Enquiry: ${form.product}${form.practice ? ` (${form.practice})` : ""}`,
   )}&body=${encodeURIComponent(compose())}`;

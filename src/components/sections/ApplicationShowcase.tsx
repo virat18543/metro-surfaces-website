@@ -76,9 +76,11 @@ export function ApplicationShowcase() {
               <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-soft text-pretty">
                 {product.blurb}
               </p>
-              <p className="mt-5 inline-block border border-line-strong px-3 py-1.5 text-[0.7rem] tracking-[0.16em] uppercase text-ink-soft">
-                8 × 4 feet available
-              </p>
+              {product.format && (
+                <p className="mt-5 inline-block border border-line-strong px-3 py-1.5 text-[0.7rem] tracking-[0.16em] uppercase text-ink-soft">
+                  {product.format}
+                </p>
+              )}
             </div>
           </div>
 

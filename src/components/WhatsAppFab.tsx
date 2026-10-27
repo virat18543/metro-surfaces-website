@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useState } from "react";
 
-import { contact } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 /** Floating WhatsApp shortcut. Appears once the visitor starts reading. */
 export function WhatsAppFab() {
@@ -16,7 +16,7 @@ export function WhatsAppFab() {
     <AnimatePresence>
       {visible && (
         <motion.a
-          href={contact.whatsapp}
+          href={whatsappLink("Hi Metro Surfaces, I have an enquiry.")}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact Metro Surfaces on WhatsApp"
@@ -26,9 +26,9 @@ export function WhatsAppFab() {
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.94 }}
-          className="group fixed right-5 bottom-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-maroon shadow-[0_10px_40px_-8px_rgba(139,26,38,0.55)] transition-colors duration-500 hover:bg-maroon-deep sm:right-8 sm:bottom-8"
+          className="group fixed right-5 bottom-5 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-maroon shadow-[0_10px_40px_-8px_rgba(139,26,38,0.55)] transition-colors duration-500 hover:bg-maroon-deep sm:right-8 sm:bottom-8"
         >
-          <span className="absolute inset-0 animate-[pulse-glow] rounded-full bg-maroon/30 blur-md" />
+          <span className="absolute inset-0 animate-pulse-glow rounded-full bg-maroon/30 blur-md" />
           <svg
             viewBox="0 0 24 24"
             fill="currentColor"

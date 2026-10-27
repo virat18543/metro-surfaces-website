@@ -4,7 +4,7 @@ import { LogoMark } from "@/components/Logo";
 import { Reveal } from "@/components/motion/Reveal";
 import { SocialLinks } from "@/components/SocialLinks";
 import { products } from "@/lib/products";
-import { contact, nav, site } from "@/lib/site";
+import { contact, nav, site, whatsappLink } from "@/lib/site";
 
 
 export function Footer() {
@@ -24,7 +24,7 @@ export function Footer() {
           </h2>
           <div className="mt-9 flex flex-wrap gap-4">
             <a
-              href={contact.whatsapp}
+              href={whatsappLink("Hi Metro Surfaces, I have an enquiry.")}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 bg-maroon px-7 py-4 text-xs tracking-[0.2em] uppercase text-white transition-colors duration-400 hover:bg-maroon-deep"

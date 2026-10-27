@@ -15,7 +15,7 @@ export function Marquee({
 
   return (
     <div aria-hidden="true" className={cn("mask-fade-x overflow-hidden", className)}>
-      <div className="flex w-max animate-[marquee] [animation-duration:42s]">
+      <div className="flex w-max animate-marquee">
         {track.map((item, i) => (
           <span
             key={`${item}-${i}`}

@@ -27,6 +27,13 @@ export const contact = {
 } as const;
 
 /**
+ * WhatsApp link with a message already typed in, so the chat opens knowing
+ * what the visitor wants instead of starting blank.
+ */
+export const whatsappLink = (message: string) =>
+  `${contact.whatsapp}?text=${encodeURIComponent(message)}`;
+
+/**
  * Social profiles. Order here is the order they render everywhere.
  * `handle` is the human-readable label shown next to the icon in list
  * layouts; the icon-only rows fall back to `label` for screen readers.
@@ -52,6 +59,8 @@ export const social = [
 export const nav = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
+  { label: "Acrycore", href: "/acrycore" },
+  { label: "Wood Veneer", href: "/woodveneer" },
   { label: "Applications", href: "/applications" },
   { label: "Philosophy", href: "/philosophy" },
   { label: "Contact", href: "/contact" },

@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-
 import { PageHero } from "@/components/PageHero";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ProductRow } from "@/components/sections/ProductRow";
+import { pageMetadata } from "@/lib/metadata";
 import { products, specifications } from "@/lib/products";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Products: Acrycore, Laminates, Louvers & Cane Wallpaper",
+  shareTitle: "Products",
   description:
-    "Explore the Metro Surfaces collection: UV-resistant ASA Acrycore sheets, high-pressure decorative laminates, architectural louvers and natural cane wallpaper. 8×4 ft standard, custom sizes on request.",
-  alternates: { canonical: "/products" },
-};
+    "Explore the Metro Surfaces collection: UV-resistant ASA Acrycore sheets, high-pressure decorative laminates, architectural louvers and natural cane wallpaper. Custom sizes on request.",
+  path: "/products",
+});
 
 export default function ProductsPage() {
   return (

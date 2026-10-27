@@ -1,18 +1,19 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 
 import { PageHero } from "@/components/PageHero";
 import { RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ApplicationShowcase } from "@/components/sections/ApplicationShowcase";
+import { pageMetadata } from "@/lib/metadata";
 import { applicationSectors } from "@/lib/products";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Applications: From Product to Space",
+  shareTitle: "Applications",
   description:
     "See Metro Surfaces decorative surfaces in place: corporate office paneling, residential feature walls, restaurant ceilings, partitions, exterior cladding and more.",
-  alternates: { canonical: "/applications" },
-};
+  path: "/applications",
+});
 
 export default function ApplicationsPage() {
   return (
@@ -31,7 +32,6 @@ export default function ApplicationsPage() {
       <section className="border-t border-line bg-paper-sunk py-24 lg:py-32">
         <div className="shell">
           <SectionHeading
-            index="02"
             eyebrow="Versatile Applications"
             title="Specified across every kind of space."
           />

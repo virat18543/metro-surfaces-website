@@ -2,12 +2,13 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 import type { Product } from "@/lib/products";
-import { contact } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 /** One full-width product entry, image and copy alternating sides. */
 export function ProductRow({
@@ -83,7 +84,9 @@ export function ProductRow({
 
           <Reveal delay={0.1} className="mt-9 flex flex-wrap gap-4">
             <a
-              href={contact.whatsapp}
+              href={whatsappLink(
+                `Hi Metro Surfaces, I would like to request samples of ${product.name}.`,
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 bg-maroon px-7 py-3.5 text-xs tracking-[0.2em] uppercase text-white transition-colors duration-500 hover:bg-maroon-deep"
@@ -93,7 +96,18 @@ export function ProductRow({
                 →
               </span>
             </a>
-            <a
+            {product.library && (
+              <Link
+                href={product.library.href}
+                className="group inline-flex items-center gap-3 border border-line-strong px-7 py-3.5 text-xs tracking-[0.2em] uppercase text-ink-soft transition-colors duration-500 hover:border-maroon hover:text-maroon"
+              >
+                {product.library.label}
+                <span className="transition-transform duration-500 group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            )}
+            <Link
               href="/applications"
               className="group inline-flex items-center gap-3 border border-line-strong px-7 py-3.5 text-xs tracking-[0.2em] uppercase text-ink-soft transition-colors duration-500 hover:border-ink-dim hover:text-ink"
             >
@@ -101,7 +115,7 @@ export function ProductRow({
               <span className="transition-transform duration-500 group-hover:translate-x-1">
                 →
               </span>
-            </a>
+            </Link>
           </Reveal>
         </div>
       </div>

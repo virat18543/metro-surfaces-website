@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { contact, site, social } from "@/lib/site";
@@ -76,7 +77,7 @@ const structuredData = {
   telephone: contact.phone,
   email: contact.email,
   areaServed: "IN",
-  priceRange: "$$$",
+  priceRange: "₹₹₹",
   sameAs: social.map((profile) => profile.href),
   openingHoursSpecification: [
     {
@@ -120,11 +121,18 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        {/* Scroll reveals render hidden until JavaScript runs. Without it,
+            show everything rather than leave the sections blank. */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         <SmoothScroll />
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <WhatsAppFab />
+        <MotionProvider>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <WhatsAppFab />
+        </MotionProvider>
       </body>
     </html>
   );

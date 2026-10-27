@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Stats } from "@/components/sections/Stats";
 import { Values } from "@/components/sections/Values";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Philosophy: Our Core Values",
+  shareTitle: "Our Philosophy",
   description:
     "Uncompromising service, supply continuity, ethical practice and quality excellence. The principles behind how Metro Surfaces partners with architects and interior designers.",
-  alternates: { canonical: "/philosophy" },
-};
+  path: "/philosophy",
+});
 
 export default function PhilosophyPage() {
   return (

@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
-
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactBand } from "@/components/sections/ContactBand";
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
 import { SocialLinks } from "@/components/SocialLinks";
+import { pageMetadata } from "@/lib/metadata";
 import { contact } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact: Talk to our surface specialists",
+  shareTitle: "Contact",
   description:
     "Reach Metro Surfaces on WhatsApp, phone or email for premium decorative surface solutions. Monday to Saturday, 9:00 AM – 6:00 PM.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

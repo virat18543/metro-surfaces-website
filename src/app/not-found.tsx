@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { Reveal } from "@/components/motion/Reveal";
 import { GridLines } from "@/components/SectionHeading";
 
 export default function NotFound() {
@@ -12,7 +11,7 @@ export default function NotFound() {
         <GridLines className="opacity-50" />
 
         <div className="relative max-w-2xl">
-          <Reveal>
+          <div className="rise">
             <p className="eyebrow flex items-center gap-3">
               <span className="h-px w-10 bg-maroon-deep" />
               Error 404
@@ -44,7 +43,7 @@ export default function NotFound() {
                 </span>
               </Link>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

@@ -3,14 +3,26 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 
 import { Magnetic } from "@/components/motion/Magnetic";
 import { cn } from "@/lib/cn";
 import { products } from "@/lib/products";
-import { contact } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+
+/**
+ * Inline values for the CSS `rise` entrance. The hero is the first thing on
+ * screen, so it animates in CSS rather than through motion: motion's start
+ * state ships in the server HTML as opacity 0 and stays that way until
+ * JavaScript hydrates, which on a slow phone is a blank page.
+ */
+const rise = (delay: number, y?: string) =>
+  ({
+    "--rise-delay": `${delay}s`,
+    ...(y ? { "--rise-y": y } : {}),
+  }) as CSSProperties;
 
 /**
  * Split editorial hero: type on paper at left, a vertical stack of material
@@ -31,56 +43,46 @@ export function Hero() {
               min-w-0: grid items default to min-width:auto, which lets a
               wide child force the whole column past the viewport. */}
           <div className="min-w-0 lg:col-span-6 xl:col-span-7">
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
-              className="eyebrow flex items-center gap-3"
+            <p
+              style={rise(0.1, "12px")}
+              className="rise eyebrow flex items-center gap-3"
             >
               <span className="h-px w-10 bg-maroon" />
               Premium Decorative Surfaces
-            </motion.p>
+            </p>
 
             <h1 className="mt-7 font-display text-[3.25rem] leading-[0.95] font-light tracking-[-0.02em] sm:text-7xl xl:text-[5.5rem]">
               <span className="block overflow-hidden">
-                <motion.span
-                  initial={{ y: "110%" }}
-                  animate={{ y: "0%" }}
-                  transition={{ duration: 1.05, delay: 0.18, ease: EASE }}
-                  className="block text-gradient-ink"
+                <span
+                  style={rise(0.18, "110%")}
+                  className="rise block text-gradient-ink [animation-duration:1.05s]"
                 >
                   Beautiful Spaces,
-                </motion.span>
+                </span>
               </span>
               <span className="block overflow-hidden pb-2">
-                <motion.span
-                  initial={{ y: "110%" }}
-                  animate={{ y: "0%" }}
-                  transition={{ duration: 1.05, delay: 0.3, ease: EASE }}
-                  className="block text-maroon italic"
+                <span
+                  style={rise(0.3, "110%")}
+                  className="rise block text-maroon italic [animation-duration:1.05s]"
                 >
                   Beautiful Life
-                </motion.span>
+                </span>
               </span>
             </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.5, ease: EASE }}
-              className="mt-7 max-w-lg text-base leading-relaxed text-ink-soft text-pretty"
+            <p
+              style={rise(0.5, "16px")}
+              className="rise mt-7 max-w-lg text-base leading-relaxed text-ink-soft text-pretty"
             >
               Four specialist surface lines for architects and interior
               designers who specify materials that have to hold up, visually
               and physically.
-            </motion.p>
+            </p>
 
             {/* Product index, the left-hand mirror of the swatch stack */}
-            <motion.ul
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.62 }}
-              className="mt-10 max-w-md border-t border-line"
+            <ul
+              style={rise(0.62, "0px")}
+              className="rise mt-10 max-w-md border-t border-line"
             >
               {products.map((product, i) => (
                 <li key={product.slug}>
@@ -117,13 +119,11 @@ export function Hero() {
                   </Link>
                 </li>
               ))}
-            </motion.ul>
+            </ul>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.76, ease: EASE }}
-              className="mt-10 flex flex-wrap items-center gap-5"
+            <div
+              style={rise(0.76, "16px")}
+              className="rise mt-10 flex flex-wrap items-center gap-5"
             >
               <Magnetic>
                 <Link
@@ -139,14 +139,16 @@ export function Hero() {
               </Magnetic>
 
               <a
-                href={contact.whatsapp}
+                href={whatsappLink(
+                  "Hi Metro Surfaces, I would like to request samples.",
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="link-underline py-4 text-xs tracking-[0.22em] uppercase text-ink-soft transition-colors duration-300 hover:text-ink"
               >
                 Request samples
               </a>
-            </motion.div>
+            </div>
           </div>
 
           {/* ---------------- Right: swatch stack ---------------- */}
@@ -155,21 +157,14 @@ export function Hero() {
                 narrow for its label. Vertical accordion from lg up. */}
             <div className="grid h-[26rem] grid-cols-2 gap-1.5 sm:h-[30rem] lg:flex lg:h-[34rem] lg:flex-col xl:h-[36rem]">
               {products.map((product, i) => (
-                <motion.div
+                <div
                   key={product.slug}
-                  initial={{ opacity: 0, y: 28 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.9,
-                    delay: 0.28 + i * 0.09,
-                    ease: EASE,
-                  }}
                   onMouseEnter={() => setActive(i)}
                   className={cn(
-                    "min-h-0 min-w-0 transition-[flex-grow] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+                    "rise min-h-0 min-w-0 transition-[flex-grow] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
                     active === i ? "grow-[2.4]" : "grow",
                   )}
-                  style={{ flexBasis: 0 }}
+                  style={{ flexBasis: 0, ...rise(0.28 + i * 0.09) }}
                 >
                   <Link
                     href={`/products#${product.slug}`}
@@ -235,20 +230,20 @@ export function Hero() {
                       </motion.div>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.9 }}
-              className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.7rem] tracking-[0.16em] text-ink-dim uppercase"
+            <p
+              style={rise(0.9, "0px")}
+              className="rise mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.7rem] tracking-[0.16em] text-ink-dim uppercase"
             >
-              <span>8 × 4 ft standard</span>
+              {/* Claims true of all four lines. Sheet size and UV rating are
+                  Acrycore's alone and sat under every swatch. */}
+              <span>Four specialist lines</span>
               <span className="h-2.5 w-px bg-line-strong" />
-              <span>UV resistant</span>
-            </motion.p>
+              <span>Custom sizes on request</span>
+            </p>
           </div>
         </div>
       </div>

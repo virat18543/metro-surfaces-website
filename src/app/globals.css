@@ -75,6 +75,20 @@
   }
 }
 
+/* Entrance for content above the fold. Plain CSS, so it plays as soon as
+   the stylesheet lands instead of waiting for JavaScript to hydrate: a slow
+   phone never sits on a blank hero. Set --rise-y and --rise-delay inline. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--rise-y, 28px), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes scroll-hint {
   0% {
     transform: translateY(-60%);
@@ -229,6 +243,11 @@
 }
 
 @layer utilities {
+  .rise {
+    animation: rise 0.9s var(--ease-out-expo) both;
+    animation-delay: var(--rise-delay, 0s);
+  }
+
   .text-balance {
     text-wrap: balance;
   }

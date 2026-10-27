@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 /**
  * Brand mark rebuilt as inline SVG.
  *
- * The supplied logo.svg is a 1600-path trace with black text, which is
+ * The supplied logo file was a 1600-path trace with black text, which is
  * invisible on a dark canvas and can't be recoloured reliably. This
  * reproduces the same four overlapping panels (two maroon, two ash, with
  * ash laid over maroon to create the dusty-pink intersections) as

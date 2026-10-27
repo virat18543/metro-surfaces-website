@@ -1,16 +1,15 @@
-import type { Metadata } from "next";
-
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
+import { pageMetadata } from "@/lib/metadata";
 import { contact } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy Policy",
   description:
     "How Metro Surfaces collects, uses, shares and protects the personal information you provide through this website.",
-  alternates: { canonical: "/privacy-policy" },
+  path: "/privacy-policy",
   robots: { index: true, follow: true },
-};
+});
 
 const sections: { title: string; intro?: string; items?: string[]; body?: string }[] = [
   {

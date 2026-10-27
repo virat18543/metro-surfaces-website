@@ -84,7 +84,7 @@ export function Header() {
             <Logo compact={scrolled} className="transition-transform duration-500 group-hover:scale-[1.02]" />
           </Link>
 
-          <nav className="hidden items-center gap-9 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-4 whitespace-nowrap lg:flex xl:gap-9" aria-label="Primary">
             {nav.map((item) => {
               const active =
                 item.href === "/"
@@ -113,17 +113,15 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a
-              href={contact.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="group hidden items-center gap-2.5 border border-line-strong px-5 py-2.5 text-xs tracking-[0.2em] uppercase text-ink transition-colors duration-400 hover:border-maroon hover:bg-maroon/8 sm:inline-flex"
             >
               Enquire
               <span className="transition-transform duration-400 group-hover:translate-x-1">
                 →
               </span>
-            </a>
+            </Link>
 
             <button
               type="button"
