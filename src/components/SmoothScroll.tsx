@@ -173,6 +173,13 @@ function lastHash(hash: string): string {
 
 /** The element a URL hash points at, or null for no hash or no match. */
 function findHashTarget(hash: string): HTMLElement | null {
-  const id = decodeURIComponent(lastHash(hash).slice(1));
+  // A stray "%" in a shared link (/#%E0) makes decodeURIComponent throw, and
+  // uncaught here it takes the whole page down. Treat it as no match.
+  let id: string;
+  try {
+    id = decodeURIComponent(lastHash(hash).slice(1));
+  } catch {
+    return null;
+  }
   return id ? document.getElementById(id) : null;
 }

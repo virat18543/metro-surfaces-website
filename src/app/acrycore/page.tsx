@@ -5,7 +5,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { AcrycoreLibrary } from "@/components/sections/AcrycoreLibrary";
 import { acrycoreColours, acrycorePillars } from "@/lib/acrycore";
-import { pageMetadata } from "@/lib/metadata";
+import { jsonLd, pageMetadata } from "@/lib/metadata";
 import { site, whatsappLink } from "@/lib/site";
 
 const solidCount = acrycoreColours.filter((c) => c.type === "Solid").length;
@@ -58,7 +58,7 @@ export default function AcrycorePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}
       />
 
       <PageHero
