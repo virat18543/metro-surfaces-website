@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { jsonLd } from "@/lib/metadata";
 import { contact, site, social } from "@/lib/site";
 
 import "./globals.css";
@@ -113,7 +114,7 @@ export default function RootLayout({
       <body className="grain antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}
         />
         <a
           href="#main"

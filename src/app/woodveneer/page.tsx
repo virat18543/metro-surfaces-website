@@ -4,7 +4,7 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { WoodVeneerLibrary } from "@/components/sections/WoodVeneerLibrary";
-import { pageMetadata } from "@/lib/metadata";
+import { jsonLd, pageMetadata } from "@/lib/metadata";
 import { site, whatsappLink } from "@/lib/site";
 import {
   woodVeneerPillars,
@@ -61,7 +61,7 @@ export default function WoodVeneerPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(structuredData) }}
       />
 
       <PageHero
