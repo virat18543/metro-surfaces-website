@@ -147,3 +147,5 @@ npx vercel domains add metrosurfaces.in metro-surfaces-website --force
 Afterwards check the project's Domains tab reads "Valid Configuration"; the `www` CNAME
 target is project-specific and can be reissued on a move. There are no MX records on the
 domain, so email is not at risk.
+
+<!-- Deploy test: first push to virat18543/metro-surfaces-website (2026-10-27). -->
