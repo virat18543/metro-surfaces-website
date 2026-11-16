@@ -1,5 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
+import { team } from "@/lib/team";
+
 /**
  * Alternate spellings of a page's URL, mapped to the real route.
  *
@@ -14,6 +16,8 @@ const aliases = new Map([
   ["/crycore", "/acrycore"],
   ["/woodveneer", "/woodveneer"],
   ["/wood-veneer", "/woodveneer"],
+  // Team cards: the printed code is canonical (/RRR), any casing redirects.
+  ...team.map((member) => [`/${member.code.toLowerCase()}`, `/${member.code}`] as const),
 ]);
 
 /**
@@ -49,5 +53,13 @@ export const config = {
   matcher: [
     "/:variant([Aa]?[Cc][Rr][Yy][Cc][Oo][Rr][Ee])",
     "/:variant([Ww][Oo][Oo][Dd]-?[Vv][Ee][Nn][Ee][Ee][Rr])",
+    // Team card codes from src/lib/team.ts. Matchers must be literal, so a
+    // new code needs its own line here too.
+    "/:variant([Rr][Rr][Rr])",
+    "/:variant([Jj][Gg])",
+    "/:variant([Jj][Rr][Rr])",
+    "/:variant([Rr])",
+    "/:variant([Rr][Pp][Cc])",
+    "/:variant([Bb][Pp][Gg])",
   ],
 };

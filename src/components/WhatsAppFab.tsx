@@ -1,16 +1,23 @@
 "use client";
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 import { whatsappLink } from "@/lib/site";
+import { findMember } from "@/lib/team";
 
 /** Floating WhatsApp shortcut. Appears once the visitor starts reading. */
 export function WhatsAppFab() {
+  const pathname = usePathname();
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => setVisible(latest > 420));
+
+  // A team card (/RRR, /JG...) has its own WhatsApp button for that person.
+  // The company shortcut here would send their customer to someone else.
+  if (findMember(pathname.split("/")[1] ?? "")) return null;
 
   return (
     <AnimatePresence>
