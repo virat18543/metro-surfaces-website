@@ -36,9 +36,10 @@ export const team: TeamMember[] = [
 /** Brand the saved contact carries: "<Name> - Acrycore by Metro" */
 export const cardOrg = "Acrycore by Metro";
 
+/** Website saved on the contact card. */
 export const cardWebsite = {
-  label: "www.acrycore.com",
-  href: "https://www.acrycore.com",
+  label: "www.metrosurfaces.in",
+  href: "https://www.metrosurfaces.in",
 };
 
 /**
