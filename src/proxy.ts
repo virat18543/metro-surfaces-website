@@ -61,5 +61,6 @@ export const config = {
     "/:variant([Rr])",
     "/:variant([Rr][Pp][Cc])",
     "/:variant([Bb][Pp][Gg])",
+    "/:variant([Ss][Jj][Rr])",
   ],
 };

@@ -28,6 +28,7 @@ export const team: TeamMember[] = [
   { code: "R", name: "Rajesh Rita", mobile: "8898624755" },
   { code: "RPC", name: "Rohit Chhadwa", mobile: "9821777939" },
   { code: "BPG", name: "Bhavik Gala", mobile: "7219619672" },
+  { code: "SJR", name: "Shruti Rita", mobile: "9372652074" },
 ];
 
 /** Brand the saved contact carries: "<Name> - Acrycore by Metro" */
