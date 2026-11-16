@@ -19,6 +19,8 @@ export type TeamMember = {
   mobile: string;
   /** Optional line under the name, e.g. "Sales, North East India" */
   role?: string;
+  /** Optional personal email. The card shows an Email row only if set. */
+  email?: string;
 };
 
 export const team: TeamMember[] = [
@@ -121,6 +123,7 @@ export function memberVcard(member: TeamMember, socialHrefs: { label: string; hr
     `ORG:${cardOrg}`,
     member.role ? `TITLE:${member.role}` : "",
     `TEL;TYPE=CELL,VOICE:+${intlDigits(member.mobile)}`,
+    member.email ? `EMAIL;TYPE=WORK:${member.email}` : "",
     `URL:${cardWebsite.href}`,
     ...socialHrefs.map((s) => `X-SOCIALPROFILE;TYPE=${s.label.toLowerCase()}:${s.href}`),
     "NOTE:Premium decorative surfaces since 1992. Acrycore, Digital Emboss, Wood Veneer, Louvers, Cane Wallpaper.",

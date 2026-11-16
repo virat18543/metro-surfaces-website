@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LogoMark } from "@/components/Logo";
 import { Reveal } from "@/components/motion/Reveal";
 import { SocialLinks } from "@/components/SocialLinks";
+import { HideOnTeamCard } from "@/components/team/HideOnTeamCard";
 import { products } from "@/lib/products";
 import { contact, nav, site, whatsappLink } from "@/lib/site";
 
@@ -13,6 +14,7 @@ export function Footer() {
       <div className="bloom pointer-events-none absolute -bottom-40 left-1/2 h-[28rem] w-[46rem] -translate-x-1/2 opacity-60" />
 
       <div className="shell relative pt-24 pb-10">
+        <HideOnTeamCard>
         <Reveal className="max-w-3xl">
           <p className="eyebrow mb-6">Start a conversation</p>
           <h2 className="font-display text-4xl leading-[1.1] font-light text-balance text-ink sm:text-5xl lg:text-6xl">
@@ -47,6 +49,7 @@ export function Footer() {
         </Reveal>
 
         <div className="rule my-16" />
+        </HideOnTeamCard>
 
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -98,6 +101,7 @@ export function Footer() {
             </ul>
           </div>
 
+          <HideOnTeamCard>
           <div>
             <h3 className="eyebrow mb-5">Connect</h3>
             <ul className="space-y-3 text-sm">
@@ -124,6 +128,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
+          </HideOnTeamCard>
         </div>
 
         {/* Oversized watermark anchors the footer without extra imagery */}

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { LogoMark } from "@/components/Logo";
 import { SaveContactButton } from "@/components/team/SaveContactButton";
 import { pageMetadata } from "@/lib/metadata";
-import { contact, site, social } from "@/lib/site";
+import { site, social } from "@/lib/site";
 import {
   cardCatalogues,
   cardOrg,
@@ -229,7 +229,9 @@ export default async function TeamCardPage({ params }: Props) {
           <div className="grid gap-px border border-line bg-line">
             <Row href={memberWhatsapp(member, `${hi}, `)} icon={ICONS.chat} title="WhatsApp us" note={phone} />
             <Row href={`tel:+${intlDigits(member.mobile)}`} icon={ICONS.phone} title="Call us" note={phone} />
-            <Row href={contact.emailHref} icon={ICONS.mail} title="Email" note={contact.email} />
+            {member.email && (
+              <Row href={`mailto:${member.email}`} icon={ICONS.mail} title="Email" note={member.email} />
+            )}
             <Row href={cardWebsite.href} icon={ICONS.globe} title="Visit our website" note={cardWebsite.label} />
           </div>
         </Section>

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/Logo";
 import { SocialLinks } from "@/components/SocialLinks";
+import { HideOnTeamCard } from "@/components/team/HideOnTeamCard";
 import { cn } from "@/lib/cn";
 import { getLenis } from "@/lib/lenis-store";
 import { contact, nav } from "@/lib/site";
@@ -189,6 +190,7 @@ export function Header() {
               transition={{ duration: 0.5, delay: 0.36 }}
               className="shell relative pb-12"
             >
+              <HideOnTeamCard>
               <p className="eyebrow mb-3">Direct</p>
               <a
                 href={contact.phoneHref}
@@ -202,6 +204,7 @@ export function Header() {
               >
                 {contact.email}
               </a>
+              </HideOnTeamCard>
               <SocialLinks className="mt-6" />
             </motion.div>
           </motion.div>
